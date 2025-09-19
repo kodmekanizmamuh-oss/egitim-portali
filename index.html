@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Eğitim Portalı — 1-12 (Satış & Yönetim)</title>
+<style>
+  :root{--bg:#f6f8fb;--card:#fff;--accent:#1e90ff;--muted:#556}
+  body{font-family:Inter,Arial,Helvetica,sans-serif;margin:0;background:var(--bg);color:#111}
+  header{background:#fff;border-bottom:1px solid #e7eef8;padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
+  .brand{font-weight:700;color:var(--accent)}
+  .container{max-width:1100px;margin:20px auto;padding:0 16px;display:grid;grid-template-columns:300px 1fr;gap:18px}
+  .card{background:var(--card);padding:14px;border-radius:10px;box-shadow:0 6px 20px rgba(13,38,76,0.04)}
+  nav a{display:block;padding:8px;border-radius:8px;color:#1f2d3d;text-decoration:none;margin-bottom:6px}
+  nav a:hover{background:#f0f8ff}
+  h2{margin:6px 0}
+  .muted{color:var(--muted);font-size:14px}
+  .btn{display:inline-block;padding:8px 12px;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none;border:none;cursor:pointer}
+  input,select,textarea{width:100%;padding:8px;border-radius:6px;border:1px solid #e7f0fb;margin-top:6px}
+  .note{padding:10px;background:#fbfbfd;border-left:4px solid #eef5ff;margin:10px 0;border-radius:6px}
+  .list-item{padding:10px;border-radius:8px;border:1px solid #eef3f8;margin-bottom:8px;background:#fff}
+  footer{text-align:center;padding:12px;color:var(--muted);font-size:13px}
+  @media(max-width:900px){.container{grid-template-columns:1fr;padding:0 12px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">Eğitim Portalı • 1–12</div>
+  <div class="muted">Durum: <span id="status-text">Hazır</span></div>
+</header>
+
+<div class="container">
+  <aside class="card">
+    <h3>Menü</h3>
+    <nav id="class-nav"></nav>
+    <hr/>
+    <div class="muted">Ara</div>
+    <input id="search" placeholder="Ders, konu veya not ara"/>
+    <div style="margin-top:10px"><button class="btn" id="show-all">Tümünü Göster</button></div>
+    <hr/>
+    <div style="margin-top:10px">
+      <h4>Yedek / Geri Yükle</h4>
+      <button id="export-btn" class="btn" style="background:#444">Export JSON</button>
+      <div style="height:8px"></div>
+      <input type="file" id="import-file" accept=".json"/>
+    </div>
+  </aside>
+
+  <main>
+    <section class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h2 id="page-title">Hoşgeldin</h2>
+        <div class="muted">IBAN: <strong id="top-iban">—</strong></div>
+      </div>
+      <p class="muted">Sol menüden sınıf seç veya aşağıdaki not listesinden gez. Satın almak için 'Satın Al' tuşunu kullan.</p>
+
+      <div id="content-area" style="margin-top:12px"></div>
+    </section>
+
+    <section class="card" id="payment-card" style="margin-top:12px;display:none">
+      <h3>Ödeme — Havale / EFT</h3>
+      <div class="note" id="payment-box">Ödeme bilgisi yükleniyor...</div>
+      <div style="margin-top:10px">
+        <button class="btn" id="copy-iban">IBAN'ı Kopyala</button>
+        <button class="btn" id="mailto-order" style="background:#4caf50">Dekont Gönder (E-posta)</button>
+        <a id="whatsapp-order" class="btn" style="background:#128C7E;text-decoration:none;color:#fff;margin-left:6px" target="_blank">WhatsApp ile Gönder</a>
+      </div>
+      <p class="muted" style="margin-top:8px">Ödeme sonrası dekontu bize gönderin; ödeme onaylandıktan sonra indirme bağlantısı veya dosya size gönderilecektir.</p>
+    </section>
+
+    <section class="card" id="admin-panel" style="margin-top:12px;display:none">
+      <h3>Admin Paneli</h3>
+      <div class="small">Gizli alan — localStorage içinde parola saklanır.</div>
+      <div style="margin-top:8px">
+        <label>Admin Parola (ilk: <strong>admin123</strong>)</label>
+        <input id="admin-pass" placeholder="Yeni admin parolası"/>
+        <div style="height:8px"></div>
+        <button class="btn" id="save-admin-pass">Parolayı Kaydet</button>
+      </div>
+
+      <hr style="margin:10px 0">
+
+      <h4>Ödeme / IBAN Bilgisi</h4>
+      <label>Banka</label><input id="admin-banka"/>
+      <label>IBAN</label><input id="admin-iban"/>
+      <label>Hesap Sahibi</label><input id="admin-hesap"/>
+      <div style="height:8px"></div>
+      <button class="btn" id="save-iban">IBAN Kaydet</button>
+
+      <hr style="margin:10px 0">
+
+      <h4>Ders Notu Ekle</h4>
+      <label>Sınıf</label>
+      <select id="admin-class"></select>
+      <label>Ders</label><input id="admin-ders" placeholder="Matematik"/>
+      <label>Not Başlığı</label><input id="admin-title" placeholder="Konu özeti / Deneme"/>
+      <label>Fiyat (TL)</label><input id="admin-price" placeholder="Örn: 25"/>
+      <label>İndirme Linki (paylaşılabilir link - Google Drive vb.)</label><input id="admin-link" placeholder="https://drive.google.com/..."/>
+      <label>Açıklama</label><textarea id="admin-desc" rows="3"></textarea>
+      <div style="height:8px"></div>
+      <button class="btn" id="add-note">Notu Ekle</button>
+
+      <hr style="margin:10px 0">
+
+      <h4>Bekleyen Siparişler</h4>
+      <div id="orders-area"></div>
+    </section>
+
+  </main>
+</div>
+
+<footer>© <span id="year"></span> — Eğitim Portalı. Not: Ödeme & teslimat manueldir.</footer>
+
+<script>
+/* ========= AYARLAR (değiştir) =========
+   - SITE_OWNER_EMAIL -> ödeme dekontu alacağın e-posta
+   - WHATSAPP_NUMBER -> Whatsapp ile dekont alacağın numara (ülke kodlu, örn: 905xxxxxxxxx)
+*/
+const SITE_OWNER_EMAIL = "senin@email.com";
+const WHATSAPP_NUMBER = "90XXXXXXXXXX";
+/* ===================================== */
+
+(function(){
+  const STORAGE_KEY = 'edu_portal_v2';
+  const DEFAULT_ADMIN_PASS = 'admin123';
+
+  const defaultData = {
+    iban: { banka:'Türkiye Örnek Bankası', iban:'TR00 0000 0000 0000 0000 0000 00', hesap:'Ad Soyad' },
+    adminPass: DEFAULT_ADMIN_PASS,
+    lessons: {
+      "1": { sinif:"1. Sınıf", dersler: {
+        "Türkçe":["Sesler ve Harfler","Kelimeler ve Cümleler","Okuma Alıştırmaları","Yazı Çalışmaları"],
+        "Matematik":["Sayılar 1-100","Toplama ve Çıkarma","Geometrik Şekiller","Zaman ve Ölçme"],
+        "Hayat Bilgisi":["Ailem ve Okulum","Canlılar ve Eşyalar","Günlük Hayat"],
+        "İngilizce":["Temel Kelimeler","Basit Selamlaşmalar"]
+      }},
+      "2": { sinif:"2. Sınıf", dersler: {
+        "Türkçe":["Okuma ve Anlama","Yazma Çalışmaları","Dil Bilgisi Temelleri"],
+        "Matematik":["Toplama ve Çıkarma","Saatler","Para Bilgisi"],
+        "Hayat Bilgisi":["Sağlık ve Temizlik","Ev ve Okul"],
+        "İngilizce":["Renkler","Sayılar 1-100"]
+      }},
+      "3": { sinif:"3. Sınıf", dersler: {
+        "Türkçe":["Paragraf Bilgisi","Okuma-İfade"],
+        "Matematik":["Çarpma ve Bölme","Kesirlerin Temeli"],
+        "Fen Bilimleri":["Canlılar ve Hayat","Madde ve Değişim"],
+        "Sosyal Bilgiler":["Toplum ve Kurallar"],
+        "İngilizce":["Günlük İfadeler"]
+      }},
+      "4": { sinif:"4. Sınıf", dersler: {
+        "Türkçe":["Paragraf Çalışmaları","Yazım Kuralları"],
+        "Matematik":["Kesirler","Alan ve Çevre"],
+        "Fen Bilimleri":["Canlıların Yapısı"],
+        "Sosyal Bilgiler":["Tarih ve Kültür"],
+        "İngilizce":["Basit Diyaloglar"]
+      }},
+      "5": { sinif:"5. Sınıf", dersler: {
+        "Türkçe":["Metin Türleri","Dil Bilgisi"],
+        "Matematik":["Doğal Sayılar","Ondalık Kesirler"],
+        "Fen Bilimleri":["Maddenin Halleri","Basit Elektrik"],
+        "Sosyal Bilgiler":["Bölgeler ve Yaşam"],
+        "İngilizce":["Dil Bilgisi Temelleri"]
+      }},
+      "6": { sinif:"6. Sınıf", dersler: {
+        "Türkçe":["Anlatım Bozuklukları","Edebiyat"],
+        "Matematik":["Oran ve Orantı","Cebir Temelleri"],
+        "Fen Bilimleri":["Hareket ve Kuvvet"],
+        "Sosyal Bilgiler":["Tarih Konuları"],
+        "İngilizce":["Okuma ve Yazma"]
+      }},
+      "7": { sinif:"7. Sınıf", dersler: {
+        "Türkçe":["Anlam Bilgisi","Edebiyat"],
+        "Matematik":["Cebir","Geometri Temelleri"],
+        "Fen Bilimleri":["Enerji ve Dönüşümler"],
+        "Sosyal Bilgiler":["Coğrafya Konuları"],
+        "İngilizce":["Dil Bilgisi Uygulamaları"]
+      }},
+      "8": { sinif:"8. Sınıf", dersler: {
+        "Türkçe":["Paragraf ve Kompozisyon"],
+        "Matematik":["Denklemler","Geometri"],
+        "Fen Bilimleri":["Kimya ve Fizik Temelleri"],
+        "Sosyal Bilgiler":["Tarih ve Coğrafya"],
+        "İngilizce":["Sınav Hazırlık"]
+      }},
+      "9": { sinif:"9. Sınıf", dersler: {
+        "Türk Dili ve Edebiyatı":["Dönemler","Şiir ve İnceleme"],
+        "Matematik":["Fonksiyonlar","Geometri"],
+        "Fizik":["Kuvvet ve Hareket"],
+        "Kimya":["Atom ve Periyodik"],
+        "Biyoloji":["Hücre ve Canlılık"],
+        "Tarih":["Osmanlı ve Dünya Tarihi"],
+        "Coğrafya":["Dünya ve Türkiye Coğrafyası"],
+        "İngilizce":["Kapsamlı Dil Bilgisi"]
+      }},
+      "10": { sinif:"10. Sınıf", dersler: {
+        "Türk Dili ve Edebiyatı":["Edebiyat Akımları"],
+        "Matematik":["Polinomlar","İntegrale Giriş"],
+        "Fizik":["Elektrik ve Manyetizma"],
+        "Kimya":["Kimyasal Reaksiyonlar"],
+        "Biyoloji":["Genetik"],
+        "Tarih":["Modern Tarih"],
+        "Coğrafya":["Ekonomi Coğrafyası"],
+        "İngilizce":["İleri Dil Bilgisi"]
+      }},
+      "11": { sinif:"11. Sınıf", dersler: {
+        "Türk Dili ve Edebiyatı":["Edebi Eser İncelemesi"],
+        "Matematik":["Türev ve Uygulamaları"],
+        "Fizik":["Modern Fizik"],
+        "Kimya":["Organik Kimya Temelleri"],
+        "Biyoloji":["Ekoloji"],
+        "Tarih":["Çağdaş Tarih"],
+        "Coğrafya":["Nüfus ve Yerleşme"],
+        "İngilizce":["Akademik İngilizce"]
+      }},
+      "12": { sinif:"12. Sınıf", dersler: {
+        "Türk Dili ve Edebiyatı":["Edebiyat Sınav Hazırlığı"],
+        "Matematik":["Analiz ve İntegral"],
+        "Fizik":["Dalga ve Optik"],
+        "Kimya":["Analitik Kimya"],
+        "Biyoloji":["Biyoteknoloji"],
+        "Tarih":["Çağdaş Dünya Tarihi"],
+        "Coğrafya":["Türkiye'nin Coğrafyası"],
+        "İngilizce":["YKS Hazırlık"]
+      }}
+    },
+    orders: []
+  };
+
+  function load(){ try{ const r = localStorage.getItem(STORAGE_KEY); if(!r){ localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultData)); return defaultData; } return JSON.parse(r); }catch(e){ localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultData)); return defaultData; } }
+  function save(s){ localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); }
+
+  let state = load();
+
+  function $(s){ return document.querySelector(s) }
+  function el(tag, attrs){ const e=document.createElement(tag); if(attrs) Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v)); return e }
+  function formatCurrency(n){ return Number(n||0).toLocaleString('tr-TR') + ' TL' }
+  function escapeHtml(s){ return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  function init(){
+    $('#year').textContent = new Date().getFullYear();
+    populateNav();
+    populateAdminClassSelect();
+    renderIban();
+    renderAllNotes();
+    bindUI();
+    renderOrders();
+  }
+
+  function populateNav(){
+    const nav = $('#class-nav'); nav.innerHTML = '';
+    Object.keys(state.lessons).forEach(k=>{
+      const a = el('a'); a.href='#'; a.textContent = state.lessons[k].sinif;
+      a.addEventListener('click', (e)=>{ e.preventDefault(); renderClass(k); });
+      nav.appendChild(a);
+    });
+  }
+  function populateAdminClassSelect(){
+    const sel = $('#admin-class'); sel.innerHTML = '';
+    Object.keys(state.lessons).forEach(k=>{ const o = el('option'); o.value=k; o.textContent = state.lessons[k].sinif; sel.appendChild(o); });
+  }
+
+  function bindUI(){
+    $('#show-all').addEventListener('click', ()=> renderAllNotes());
+    $('#search').addEventListener('input', e=> renderSearch(e.target.value));
+    $('#export-btn').addEventListener('click', ()=> {
+      const blob = new Blob([JSON.stringify(state,null,2)],{type:'application/json'}); const url = URL.createObjectURL(blob);
+      const a = el('a'); a.href = url; a.download = 'edu-backup.json'; document.body.appendChild(a); a.click(); a.remove();
+    });
+    $('#import-file').addEventListener('change', e=> {
+      const f = e.target.files[0]; if(!f) return;
+      const r = new FileReader(); r.onload = ()=> { try{ const obj = JSON.parse(r.result); state = obj; save(state); alert('Yüklendi. Sayfa yenilenecek.'); location.reload(); }catch(err){ alert('Geçersiz JSON'); } }; r.readAsText(f);
+    });
+    $('#copy-iban').addEventListener('click', ()=> { navigator.clipboard.writeText(state.iban.iban||'').then(()=> alert('IBAN kopyalandı')) });
+    $('#admin-toggle')?.addEventListener('click', adminToggle);
+    $('#save-admin-pass')?.addEventListener('click', ()=> { const p = $('#admin-pass').value.trim(); if(!p){alert('Parola boş olamaz');return;} state.adminPass = p; save(state); $('#admin-pass').value=''; alert('Parola kaydedildi'); });
+    $('#save-iban')?.addEventListener('click', saveIbanFromAdmin);
+    $('#add-note')?.addEventListener('click', adminAddNote);
+    $('#mailto-order').addEventListener('click', ()=> {
+      const subj = encodeURIComponent('Ödeme Dekontu - Not Satın Alma'); const body = encodeURIComponent('Merhaba,%0D%0A%0D%0AAd Soyad:%0D%0ATelefon:%0D%0AOdeme Tutarı:%0D%0Aİlgili Not:%0D%0A%0D%0ADekontu ekliyorum.%0D%0A');
+      window.location.href = `mailto:${encodeURIComponent(SITE_OWNER_EMAIL)}?subject=${subj}&body=${body}`;
+    });
+    $('#whatsapp-order').addEventListener('click', ()=> {
+      const waText = encodeURIComponent('Merhaba, ödeme yaptım. Ad Soyad: - Tutar: - Açıklama: -'); const wa = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
+      $('#whatsapp-order').href = wa; window.open(wa,'_blank');
+    });
+    $('#show-orders')?.addEventListener('click', renderOrders);
+  }
+
+  // RENDER FUNCTIONS
+  function renderIban(){
+    $('#top-iban').textContent = state.iban.iban || '—';
+    $('#payment-box').innerHTML = `<div><strong>Banka:</strong> ${escapeHtml(state.iban.banka||'')}</div>
+      <div style="margin-top:6px"><strong>IBAN:</strong> ${escapeHtml(state.iban.iban||'')}</div>
+      <div style="margin-top:6px"><strong>Hesap:</strong> ${escapeHtml(state.iban.hesap||'')}</div>`;
+  }
+
+  function renderAllNotes(){
+    $('#page-title').textContent = 'Tüm Notlar';
+    $('#content-area').innerHTML = '';
+    const wrap = el('div');
+    Object.keys(state.lessons).forEach(k=>{
+      const cls = state.lessons[k];
+      const header = el('div'); header.innerHTML = `<h3 style="margin:8px 0">${escapeHtml(cls.sinif)}</h3>`;
+      wrap.appendChild(header);
+      Object.keys(cls.dersler).forEach(d=>{
+        const arr = cls.dersler[d] || [];
+        if(arr.length === 0) return;
+        const sub = el('div'); sub.innerHTML = `<strong>${escapeHtml(d)}</strong>`; wrap.appendChild(sub);
+        arr.forEach(n => wrap.appendChild(renderNoteCard(k,d,n)));
+      });
+    });
+    if(!wrap.innerHTML) wrap.innerHTML = '<p class="muted">Henüz not yok. Admin panelinden ekleyin.</p>';
+    $('#content-area').appendChild(wrap);
+  }
+
+  function renderClass(k){
+    const cls = state.lessons[k];
+    $('#page-title').textContent = cls.sinif;
+    $('#content-area').innerHTML = '';
+    const cont = el('div');
+    Object.keys(cls.dersler).forEach(d=>{
+      cont.appendChild(el('h4',{innerHTML:escapeHtml(d)}));
+      const notes = cls.dersler[d] || [];
+      if(notes.length===0) cont.appendChild(el('div',{className:'muted',innerHTML:'Henüz not yok.'}));
+      notes.forEach(n => cont.appendChild(renderNoteCard(k,d,n)));
+    });
+    $('#content-area').appendChild(cont);
+  }
+
+  function renderNoteCard(k,d,n){
+    const box = el('div'); box.className = 'list-item';
+    box.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div><strong>${escapeHtml(n.title)}</strong></div>
+        <div class="muted">${escapeHtml(n.desc||'')}</div>
+        <div class="muted" style="margin-top:6px">Fiyat: <strong>${formatCurrency(n.price)}</strong></div>
+      </div>
+      <div style="text-align:right">
+        <button class="btn buy-btn">Satın Al</button>
+        <div style="height:8px"></div>
+        <button class="btn" style="background:#666" data-admin-edit>Düzenle</button>
+      </div>
+    </div>`;
+    box.querySelector('.buy-btn').addEventListener('click', ()=> openBuy(k,d,n));
+    box.querySelector('[data-admin-edit]').addEventListener('click', ()=>{
+      if(!isAdmin()){ alert('Admin girişi gerekli'); return; }
+      $('#admin-class').value = k; $('#admin-ders').value = d; $('#admin-title').value = n.title;
+      $('#admin-price').value = n.price; $('#admin-link').value = n.link || ''; $('#admin-desc').value = n.desc || '';
+      // remove old entry to re-add on save
+      const arr = state.lessons[k].dersler[d];
+      const idx = arr.findIndex(x=>x.id===n.id); if(idx>-1){ arr.splice(idx,1); save(state); renderAllNotes(); }
+      alert('Düzenleme modunda: değişiklikleri tamamlayıp "Notu Ekle"e basın.');
+    });
+    return box;
+  }
+
+  function renderSearch(q){
+    q = (q||'').toLowerCase().trim();
+    if(!q) return renderAllNotes();
+    $('#page-title').textContent = `Arama: "${q}"`;
+    $('#content-area').innerHTML = '';
+    const wrap = el('div');
+    Object.keys(state.lessons).forEach(k=>{
+      const cls = state.lessons[k];
+      Object.keys(cls.dersler).forEach(d=>{
+        cls.dersler[d].forEach(n=>{
+          if( (n.title||'').toLowerCase().includes(q) || (n.desc||'').toLowerCase().includes(q) || d.toLowerCase().includes(q) ){
+            wrap.appendChild(el('div',{innerHTML:`<div style="font-weight:700">${escapeHtml(cls.sinif)} — ${escapeHtml(d)}</div>`}));
+            wrap.appendChild(renderNoteCard(k,d,n));
+          }
+        });
+      });
+    });
+    if(!wrap.innerHTML) wrap.innerHTML = '<p class="muted">Eşleşme bulunamadı.</p>';
+    $('#content-area').appendChild(wrap);
+  }
+
+  // BUY / ORDER flow (local)
+  function openBuy(k,d,n){
+    $('#payment-card').style.display = 'block';
+    const subj = encodeURIComponent(`Not Satın Alma - ${n.title}`);
+    const body = encodeURIComponent(`Merhaba,\n\nAd Soyad:\nTelefon:\nNot: ${n.title} (${state.lessons[k].sinif} / ${d})\nTutar: ${n.price} TL\nHavale yaptım, dekont ekte.\n\nTeşekkürler.`);
+    $('#mailto-order').onclick = ()=> { window.location.href = `mailto:${SITE_OWNER_EMAIL}?subject=${subj}&body=${body}`; };
+    const waText = encodeURIComponent(`Merhaba, ${n.title} satın aldım. Ad Soyad: \nTutar: ${n.price} TL\nAçıklama: `);
+    $('#whatsapp-order').href = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
+
+    if(confirm('Sipariş kaydı oluşturulsun mu? (Bu, ödeme sonrası admin tarafından onay gerektiren lokal bir kayıt oluşturur)')){
+      const id = 'ord_'+Date.now();
+      const order = { id, name:'', phone:'', email:'', class:k, ders:d, title:n.title, price:n.price||0, status:'bekle', date:new Date().toISOString(), noteLink:n.link||'' };
+      state.orders.push(order); save(state); renderOrders(); alert('Sipariş kaydedildi. Müşteri dekont gönderdiğinde admin onaylayacak.');
+    }
+  }
+
+  // ORDERS (admin)
+  function renderOrders(){
+    const area = $('#orders-area'); if(!area) return;
+    area.innerHTML = '';
+    if(!state.orders || state.orders.length===0){ area.innerHTML = '<div class="muted">Bekleyen sipariş yok.</div>'; return; }
+    state.orders.slice().reverse().forEach(o=>{
+      const box = el('div'); box.className='list-item';
+      box.innerHTML = `<div style="display:flex;justify-content:space-between">
+        <div>
+          <div><strong>${escapeHtml(o.title)}</strong> <span class="muted">(${escapeHtml(state.lessons[o.class].sinif)} / ${escapeHtml(o.ders)})</span></div>
+          <div class="muted">Durum: ${escapeHtml(o.status)} — Tarih: ${new Date(o.date).toLocaleString()}</div>
+        </div>
+        <div style="text-align:right">
+          <button class="btn" data-id="${o.id}" data-approve>Onayla</button>
+          <button class="btn" style="background:#666" data-id="${o.id}" data-del>Sil</button>
+        </div>
+      </div>`;
+      area.appendChild(box);
+      box.querySelector('[data-approve]').addEventListener('click', ()=>{
+        const id = box.querySelector('[data-approve]').getAttribute('data-id'); const idx = state.orders.findIndex(x=>x.id===id);
+        if(idx===-1) return; state.orders[idx].status = 'onay'; save(state); renderOrders(); alert('Sipariş onaylandı. Müşteriye indirme linkini manuel olarak veya e-posta/WhatsApp ile gönder.');
+      });
+      box.querySelector('[data-del]').addEventListener('click', ()=> {
+        if(!confirm('Silinsin mi?')) return; const id = box.querySelector('[data-del]').getAttribute('data-id'); state.orders = state.orders.filter(x=>x.id!==id); save(state); renderOrders();
+      });
+    });
+  }
+
+  // ADMIN
+  function adminToggle(){
+    if(isAdmin()){ localStorage.removeItem('edu_admin_token'); $('#admin-panel').style.display = 'none'; $('#admin-toggle').textContent = 'Giriş Yap'; return; }
+    const p = prompt('Admin parolası:');
+    if(!p) return;
+    if(p === state.adminPass){ localStorage.setItem('edu_admin_token','1'); $('#admin-panel').style.display = 'block'; $('#admin-toggle').textContent = 'Çıkış Yap'; $('#admin-banka').value = state.iban.banka; $('#admin-iban').value = state.iban.iban; $('#admin-hesap').value = state.iban.hesap; renderOrders(); } else alert('Parola yanlış');
+  }
+  function isAdmin(){ return !!localStorage.getItem('edu_admin_token'); }
+
+  function saveIbanFromAdmin(){
+    if(!isAdmin()){ alert('Admin olmalısın'); return; }
+    state.iban.banka = $('#admin-banka').value.trim(); state.iban.iban = $('#admin-iban').value.trim(); state.iban.hesap = $('#admin-hesap').value.trim();
+    save(state); renderIban(); alert('IBAN kaydedildi.');
+  }
+
+  function adminAddNote(){
+    if(!isAdmin()){ alert('Admin olmalısın'); return; }
+    const cls = $('#admin-class').value; const ders = ($('#admin-ders').value||'Genel').trim(); const title = ($('#admin-title').value||'').trim(); if(!title){ alert('Başlık gir'); return; }
+    const price = Number($('#admin-price').value.trim()) || 0; const link = $('#admin-link').value.trim(); const desc = $('#admin-desc').value.trim();
+    if(!state.lessons[cls].dersler[ders]) state.lessons[cls].dersler[ders] = [];
+    const id = 'n_'+Date.now();
+    const note = { id, title, price, link, desc };
+    state.lessons[cls].dersler[ders].push(note);
+    save(state);
+    $('#admin-ders').value=''; $('#admin-title').value=''; $('#admin-price').value=''; $('#admin-link').value=''; $('#admin-desc').value='';
+    renderAllNotes(); alert('Not eklendi.');
+  }
+
+  function renderSearch(q){ q=(q||'').toLowerCase().trim(); if(!q) return renderAllNotes(); $('#page-title').textContent = `Arama: "${q}"`; $('#content-area').innerHTML=''; const wrap=el('div'); Object.keys(state.lessons).forEach(k=>{ const cls=state.lessons[k]; Object.keys(cls.dersler).forEach(d=>{ cls.dersler[d].forEach(n=>{ if((n.title||'').toLowerCase().includes(q) || (n.desc||'').toLowerCase().includes(q) || d.toLowerCase().includes(q)){ wrap.appendChild(el('div',{innerHTML:`<div style="font-weight:700">${escapeHtml(cls.sinif)} — ${escapeHtml(d)}</div>`})); wrap.appendChild(renderNoteCard(k,d,n)); } }); }); }); if(!wrap.innerHTML) wrap.innerHTML='<p class="muted">Eşleşme bulunamadı.</p>'; $('#content-area').appendChild(wrap); }
+
+  // init
+  init();
+})();
+</script>
+</body>
+</html>
