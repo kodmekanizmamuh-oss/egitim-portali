@@ -2,69 +2,145 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eğitim Portalı • 1–12</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <title>Eğitim Portalı • 1-12</title>
   <style>
-    body { background: #f8f9fa; }
-    .sidebar { background: white; border-radius: 10px; padding: 15px; }
-    .content { background: white; border-radius: 10px; padding: 20px; }
-    .note-card { border: 1px solid #ddd; border-radius: 8px; padding: 10px; margin-bottom: 10px; }
-    .iban { font-weight: bold; color: #0077cc; }
+    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f8f9fa; }
+    .container { display: flex; }
+    .menu { width: 200px; background: #fff; padding: 15px; border-right: 1px solid #ccc; }
+    .menu h3 { margin-top: 0; }
+    .menu a { display:block; padding:5px; text-decoration:none; color:#007bff; }
+    .menu a:hover { background:#e9ecef; }
+    .content { flex:1; padding: 20px; }
+    .card { background:#fff; border:1px solid #ddd; padding:15px; margin-bottom:10px; border-radius:6px; }
+    .btn { background:#007bff; color:#fff; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; }
+    .iban { font-weight:bold; color:#007bff; }
   </style>
 </head>
 <body>
-  <div class="container-fluid mt-3">
-    <div class="row">
-      <!-- Sol Menü -->
-      <div class="col-md-3">
-        <div class="sidebar shadow-sm">
-          <h5>Menü</h5>
-          <ul class="list-unstyled">
-            <li>1. Sınıf</li>
-            <li>2. Sınıf</li>
-            <li>3. Sınıf</li>
-            <li>4. Sınıf</li>
-            <li>5. Sınıf</li>
-            <li>6. Sınıf</li>
-            <li>7. Sınıf</li>
-            <li>8. Sınıf</li>
-            <li>9. Sınıf</li>
-            <li>10. Sınıf</li>
-            <li>11. Sınıf</li>
-            <li>12. Sınıf</li>
-          </ul>
-        </div>
-      </div>
+  <div class="container">
+    <!-- Menü -->
+    <div class="menu">
+      <h3>Menü</h3>
+      <a href="#sinif1">1. Sınıf</a>
+      <a href="#sinif2">2. Sınıf</a>
+      <a href="#sinif3">3. Sınıf</a>
+      <a href="#sinif4">4. Sınıf</a>
+      <a href="#sinif5">5. Sınıf</a>
+      <a href="#sinif6">6. Sınıf</a>
+      <a href="#sinif7">7. Sınıf</a>
+      <a href="#sinif8">8. Sınıf</a>
+      <a href="#sinif9">9. Sınıf</a>
+      <a href="#sinif10">10. Sınıf</a>
+      <a href="#sinif11">11. Sınıf</a>
+      <a href="#sinif12">12. Sınıf</a>
+    </div>
 
-      <!-- İçerik -->
-      <div class="col-md-9">
-        <div class="content shadow-sm">
-          <h4>Tüm Notlar</h4>
-          <p>Satın almak için aşağıdaki IBAN’a ödeme yapabilirsiniz.</p>
-          <p>IBAN: <span class="iban">TR98000670100000022363236</span></p>
+    <!-- İçerik -->
+    <div class="content">
+      <h2>Tüm Notlar</h2>
+      <p>Satın almak için aşağıdaki IBAN’a ödeme yapabilirsiniz.</p>
+      <p>IBAN: <span class="iban">TR98000670100000022363236</span></p>
 
-          <h5>1. Sınıf - Türkçe</h5>
-          <div class="note-card">
-            <p>Fiyat: 50 TL</p>
-            <button class="btn btn-primary btn-sm" onclick="buyNote('1. Sınıf Türkçe', 50)">Satın Al</button>
-          </div>
+      <!-- 1. Sınıf -->
+      <h3 id="sinif1">1. Sınıf</h3>
+      <div class="card"><b>Türkçe</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Matematik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Hayat Bilgisi</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
 
-          <h5>1. Sınıf - Matematik</h5>
-          <div class="note-card">
-            <p>Fiyat: 60 TL</p>
-            <button class="btn btn-primary btn-sm" onclick="buyNote('1. Sınıf Matematik', 60)">Satın Al</button>
-          </div>
-        </div>
-      </div>
+      <!-- 2. Sınıf -->
+      <h3 id="sinif2">2. Sınıf</h3>
+      <div class="card"><b>Türkçe</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Matematik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Hayat Bilgisi</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+
+      <!-- 3. Sınıf -->
+      <h3 id="sinif3">3. Sınıf</h3>
+      <div class="card"><b>Türkçe</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Matematik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Fen Bilimleri</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Hayat Bilgisi</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+
+      <!-- 4. Sınıf -->
+      <h3 id="sinif4">4. Sınıf</h3>
+      <div class="card"><b>Türkçe</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Matematik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Fen Bilimleri</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Sosyal Bilgiler</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+
+      <!-- 5. Sınıf -->
+      <h3 id="sinif5">5. Sınıf</h3>
+      <div class="card"><b>Türkçe</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Matematik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Fen Bilimleri</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Sosyal Bilgiler</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>İngilizce</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+
+      <!-- 6. Sınıf -->
+      <h3 id="sinif6">6. Sınıf</h3>
+      <div class="card"><b>Türkçe</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Matematik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Fen Bilimleri</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Sosyal Bilgiler</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>İngilizce</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+
+      <!-- 7. Sınıf -->
+      <h3 id="sinif7">7. Sınıf</h3>
+      <div class="card"><b>Türkçe</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Matematik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Fen Bilimleri</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Sosyal Bilgiler</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>İngilizce</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+
+      <!-- 8. Sınıf -->
+      <h3 id="sinif8">8. Sınıf</h3>
+      <div class="card"><b>Türkçe</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Matematik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Fen Bilimleri</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>T.C. İnkılap Tarihi ve Atatürkçülük</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>İngilizce</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+
+      <!-- 9. Sınıf -->
+      <h3 id="sinif9">9. Sınıf</h3>
+      <div class="card"><b>Türk Dili ve Edebiyatı</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Matematik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Fizik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Kimya</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Biyoloji</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Tarih</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Coğrafya</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+
+      <!-- 10. Sınıf -->
+      <h3 id="sinif10">10. Sınıf</h3>
+      <div class="card"><b>Türk Dili ve Edebiyatı</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Matematik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Fizik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Kimya</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Biyoloji</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Tarih</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Coğrafya</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+
+      <!-- 11. Sınıf -->
+      <h3 id="sinif11">11. Sınıf</h3>
+      <div class="card"><b>Türk Dili ve Edebiyatı</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Matematik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Fizik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Kimya</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Biyoloji</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Tarih</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Coğrafya</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Felsefe</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+
+      <!-- 12. Sınıf -->
+      <h3 id="sinif12">12. Sınıf</h3>
+      <div class="card"><b>Türk Dili ve Edebiyatı</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Matematik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Fizik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Kimya</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Biyoloji</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Tarih</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Coğrafya</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
+      <div class="card"><b>Felsefe</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
     </div>
   </div>
-
-  <script>
-    function buyNote(note, price) {
-      alert(note + " notunu satın almak için " + price + " TL'yi aşağıdaki IBAN’a gönderin:\n\n" +
-            "IBAN: TR98000670100000022363236");
-    }
-  </script>
 </body>
 </html>
