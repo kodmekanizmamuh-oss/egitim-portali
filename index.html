@@ -2,145 +2,379 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>Eğitim Portalı • 1-12</title>
+  <title>DM Eğitim Portalı - İlkokul</title>
   <style>
-    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f8f9fa; }
-    .container { display: flex; }
-    .menu { width: 200px; background: #fff; padding: 15px; border-right: 1px solid #ccc; }
-    .menu h3 { margin-top: 0; }
-    .menu a { display:block; padding:5px; text-decoration:none; color:#007bff; }
-    .menu a:hover { background:#e9ecef; }
-    .content { flex:1; padding: 20px; }
-    .card { background:#fff; border:1px solid #ddd; padding:15px; margin-bottom:10px; border-radius:6px; }
-    .btn { background:#007bff; color:#fff; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; }
-    .iban { font-weight:bold; color:#007bff; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fa;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      margin: 20px auto;
+    }
+    h2 {
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 5px;
+      color: #2c3e50;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 10px 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .price {
+      color: #27ae60;
+      font-weight: bold;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 15px;
+      background: #3498db;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    .btn:hover {
+      background: #2980b9;
+    }
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+    }
+    .modal-content {
+      background: white;
+      margin: 15% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 400px;
+      text-align: center;
+    }
+    .close {
+      float: right;
+      font-size: 20px;
+      cursor: pointer;
+      color: #e74c3c;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Menü -->
-    <div class="menu">
-      <h3>Menü</h3>
-      <a href="#sinif1">1. Sınıf</a>
-      <a href="#sinif2">2. Sınıf</a>
-      <a href="#sinif3">3. Sınıf</a>
-      <a href="#sinif4">4. Sınıf</a>
-      <a href="#sinif5">5. Sınıf</a>
-      <a href="#sinif6">6. Sınıf</a>
-      <a href="#sinif7">7. Sınıf</a>
-      <a href="#sinif8">8. Sınıf</a>
-      <a href="#sinif9">9. Sınıf</a>
-      <a href="#sinif10">10. Sınıf</a>
-      <a href="#sinif11">11. Sınıf</a>
-      <a href="#sinif12">12. Sınıf</a>
-    </div>
+<header>
+  <h1>DM Eğitim Portalı</h1>
+  <p>1–4. Sınıf Ders Notları</p>
+</header>
 
-    <!-- İçerik -->
-    <div class="content">
-      <h2>Tüm Notlar</h2>
-      <p>Satın almak için aşağıdaki IBAN’a ödeme yapabilirsiniz.</p>
-      <p>IBAN: <span class="iban">TR98000670100000022363236</span></p>
+<div class="container">
 
-      <!-- 1. Sınıf -->
-      <h3 id="sinif1">1. Sınıf</h3>
-      <div class="card"><b>Türkçe</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Matematik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Hayat Bilgisi</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-
-      <!-- 2. Sınıf -->
-      <h3 id="sinif2">2. Sınıf</h3>
-      <div class="card"><b>Türkçe</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Matematik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Hayat Bilgisi</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-
-      <!-- 3. Sınıf -->
-      <h3 id="sinif3">3. Sınıf</h3>
-      <div class="card"><b>Türkçe</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Matematik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Fen Bilimleri</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Hayat Bilgisi</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-
-      <!-- 4. Sınıf -->
-      <h3 id="sinif4">4. Sınıf</h3>
-      <div class="card"><b>Türkçe</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Matematik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Fen Bilimleri</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Sosyal Bilgiler</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-
-      <!-- 5. Sınıf -->
-      <h3 id="sinif5">5. Sınıf</h3>
-      <div class="card"><b>Türkçe</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Matematik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Fen Bilimleri</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Sosyal Bilgiler</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>İngilizce</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-
-      <!-- 6. Sınıf -->
-      <h3 id="sinif6">6. Sınıf</h3>
-      <div class="card"><b>Türkçe</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Matematik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Fen Bilimleri</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Sosyal Bilgiler</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>İngilizce</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-
-      <!-- 7. Sınıf -->
-      <h3 id="sinif7">7. Sınıf</h3>
-      <div class="card"><b>Türkçe</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Matematik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Fen Bilimleri</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Sosyal Bilgiler</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>İngilizce</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-
-      <!-- 8. Sınıf -->
-      <h3 id="sinif8">8. Sınıf</h3>
-      <div class="card"><b>Türkçe</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Matematik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Fen Bilimleri</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>T.C. İnkılap Tarihi ve Atatürkçülük</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>İngilizce</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-
-      <!-- 9. Sınıf -->
-      <h3 id="sinif9">9. Sınıf</h3>
-      <div class="card"><b>Türk Dili ve Edebiyatı</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Matematik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Fizik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Kimya</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Biyoloji</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Tarih</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Coğrafya</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-
-      <!-- 10. Sınıf -->
-      <h3 id="sinif10">10. Sınıf</h3>
-      <div class="card"><b>Türk Dili ve Edebiyatı</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Matematik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Fizik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Kimya</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Biyoloji</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Tarih</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Coğrafya</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-
-      <!-- 11. Sınıf -->
-      <h3 id="sinif11">11. Sınıf</h3>
-      <div class="card"><b>Türk Dili ve Edebiyatı</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Matematik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Fizik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Kimya</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Biyoloji</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Tarih</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Coğrafya</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Felsefe</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-
-      <!-- 12. Sınıf -->
-      <h3 id="sinif12">12. Sınıf</h3>
-      <div class="card"><b>Türk Dili ve Edebiyatı</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Matematik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Fizik</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Kimya</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Biyoloji</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Tarih</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Coğrafya</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-      <div class="card"><b>Felsefe</b><br>Fiyat: 0 TL <button class="btn">Satın Al</button></div>
-    </div>
+  <h2>1. Sınıf</h2>
+  <div class="card">
+    <h3>Türkçe</h3>
+    <p class="price">Fiyat: 30 TL</p>
+    <a href="#" class="btn" onclick="openModal('1. Sınıf - Türkçe')">Satın Al</a>
+    <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📂 PDF İndir</a>
   </div>
-</body>
+  <div class="card">
+    <h3>Matematik</h3>
+    <p class="price">Fiyat: 30 TL</p>
+    <a href="#" class="btn" onclick="openModal('1. Sınıf - Matematik')">Satın Al</a>
+    <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📂 PDF İndir</a>
+  </div>
+  <div class="card">
+    <h3>Hayat Bilgisi</h3>
+    <p class="price">Fiyat: 30 TL</p>
+    <a href="#" class="btn" onclick="openModal('1. Sınıf - Hayat Bilgisi')">Satın Al</a>
+    <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📂 PDF İndir</a>
+  </div>
+
+  <h2>2. Sınıf</h2>
+  <div class="card"><h3>Türkçe</h3><p class="price">Fiyat: 35 TL</p>
+    <a href="#" class="btn" onclick="openModal('2. Sınıf - Türkçe')">Satın Al</a>
+    <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📂 PDF İndir</a>
+  </div>
+  <div class="card"><h3>Matematik</h3><p class="price">Fiyat: 35 TL</p>
+    <a href="#" class="btn" onclick="openModal('2. Sınıf - Matematik')">Satın Al</a>
+    <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📂 PDF İndir</a>
+  </div>
+  <div class="card"><h3>Hayat Bilgisi</h3><p class="price">Fiyat: 35 TL</p>
+    <a href="#" class="btn" onclick="openModal('2. Sınıf - Hayat Bilgisi')">Satın Al</a>
+    <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📂 PDF İndir</a>
+  </div>
+
+  <h2>3. Sınıf</h2>
+  <div class="card"><h3>Türkçe</h3><p class="price">Fiyat: 40 TL</p>
+    <a href="#" class="btn" onclick="openModal('3. Sınıf - Türkçe')">Satın Al</a>
+    <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📂 PDF İndir</a>
+  </div>
+  <div class="card"><h3>Matematik</h3><p class="price">Fiyat: 40 TL</p>
+    <a href="#" class="btn" onclick="openModal('3. Sınıf - Matematik')">Satın Al</a>
+    <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📂 PDF İndir</a>
+  </div>
+  <div class="card"><h3>Fen Bilimleri</h3><p class="price">Fiyat: 40 TL</p>
+    <a href="#" class="btn" onclick="openModal('3. Sınıf - Fen Bilimleri')">Satın Al</a>
+    <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📂 PDF İndir</a>
+  </div>
+  <div class="card"><h3>Hayat Bilgisi</h3><p class="price">Fiyat: 40 TL</p>
+    <a href="#" class="btn" onclick="openModal('3. Sınıf - Hayat Bilgisi')">Satın Al</a>
+    <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📂 PDF İndir</a>
+  </div>
+
+  <h2>4. Sınıf</h2>
+  <div class="card"><h3>Türkçe</h3><p class="price">Fiyat: 45 TL</p>
+    <a href="#" class="btn" onclick="openModal('4. Sınıf - Türkçe')">Satın Al</a>
+    <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📂 PDF İndir</a>
+  </div>
+  <div class="card"><h3>Matematik</h3><p class="price">Fiyat: 45 TL</p>
+    <a href="#" class="btn" onclick="openModal('4. Sınıf - Matematik')">Satın Al</a>
+    <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📂 PDF İndir</a>
+  </div>
+  <div class="card"><h3>Fen Bilimleri</h3><p class="price">Fiyat: 45 TL</p>
+    <a href="#" class="btn" onclick="openModal('4. Sınıf - Fen Bilimleri')">Satın Al</a>
+    <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📂 PDF İndir</a>
+  </div>
+  <div class="card"><h3>Sosyal Bilgiler</h3><p class="price">Fiyat: 45 TL</p>
+    <a href="#" class="btn" onclick="openModal('4. Sınıf - Sosyal Bilgiler')">Satın Al</a>
+    <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📂 PDF İndir</a>
+  </div>
+  <div class="card"><h3>İngilizce</h3><p class="price">Fiyat: 45 TL</p>
+    <a href="#" class="btn" onclick="openModal('4. Sınıf - İngilizce')">Satın Al</a>
+    <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📂 PDF İndir</a>
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="paymentModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2>Satın Alma Bilgileri</h2>
+    <p>Lütfen ödemenizi aşağıdaki IBAN'a yapınız:</p>
+    <p><strong>IBAN:</strong> TR98000670100000022363236</p>
+    <p>Ödemenizi yaptıktan sonra dekont ile iletişime geçiniz.</p>
+  </div>
+</div>
+
+<script>
+function openModal(ders) {
+  document.getElementById("paymentModal").style.display = "block";
+}
+function closeModal() {
+  document.getElementById("paymentModal").style.display = "none";
+}
+</script>
+
+</body><!-- ================= 5. Sınıf ================= -->
+<h2>5. Sınıf Dersleri</h2>
+
+<div class="card">
+  <h3>Türkçe</h3>
+  <p class="price">Fiyat: 50 TL</p>
+  <a href="#" class="btn" onclick="openModal('5. Sınıf - Türkçe')">Satın Al</a>
+  <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📄 PDF İndir</a>
+</div>
+
+<div class="card">
+  <h3>Matematik</h3>
+  <p class="price">Fiyat: 55 TL</p>
+  <a href="#" class="btn" onclick="openModal('5. Sınıf - Matematik')">Satın Al</a>
+  <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📄 PDF İndir</a>
+</div>
+
+<div class="card">
+  <h3>Fen Bilimleri</h3>
+  <p class="price">Fiyat: 60 TL</p>
+  <a href="#" class="btn" onclick="openModal('5. Sınıf - Fen Bilimleri')">Satın Al</a>
+  <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📄 PDF İndir</a>
+</div>
+
+<div class="card">
+  <h3>Sosyal Bilgiler</h3>
+  <p class="price">Fiyat: 45 TL</p>
+  <a href="#" class="btn" onclick="openModal('5. Sınıf - Sosyal Bilgiler')">Satın Al</a>
+  <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📄 PDF İndir</a>
+</div>
+
+<!-- ================= 6. Sınıf ================= -->
+<h2>6. Sınıf Dersleri</h2>
+
+<div class="card">
+  <h3>Türkçe</h3>
+  <p class="price">Fiyat: 50 TL</p>
+  <a href="#" class="btn" onclick="openModal('6. Sınıf - Türkçe')">Satın Al</a>
+  <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📄 PDF İndir</a>
+</div>
+
+<div class="card">
+  <h3>Matematik</h3>
+  <p class="price">Fiyat: 55 TL</p>
+  <a href="#" class="btn" onclick="openModal('6. Sınıf - Matematik')">Satın Al</a>
+  <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📄 PDF İndir</a>
+</div>
+
+<div class="card">
+  <h3>Fen Bilimleri</h3>
+  <p class="price">Fiyat: 60 TL</p>
+  <a href="#" class="btn" onclick="openModal('6. Sınıf - Fen Bilimleri')">Satın Al</a>
+  <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📄 PDF İndir</a>
+</div>
+
+<div class="card">
+  <h3>Sosyal Bilgiler</h3>
+  <p class="price">Fiyat: 45 TL</p>
+  <a href="#" class="btn" onclick="openModal('6. Sınıf - Sosyal Bilgiler')">Satın Al</a>
+  <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📄 PDF İndir</a>
+</div>
+
+<!-- ================= 7. Sınıf ================= -->
+<h2>7. Sınıf Dersleri</h2>
+
+<div class="card">
+  <h3>Türkçe</h3>
+  <p class="price">Fiyat: 55 TL</p>
+  <a href="#" class="btn" onclick="openModal('7. Sınıf - Türkçe')">Satın Al</a>
+  <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📄 PDF İndir</a>
+</div>
+
+<div class="card">
+  <h3>Matematik</h3>
+  <p class="price">Fiyat: 60 TL</p>
+  <a href="#" class="btn" onclick="openModal('7. Sınıf - Matematik')">Satın Al</a>
+  <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📄 PDF İndir</a>
+</div>
+
+<div class="card">
+  <h3>Fen Bilimleri</h3>
+  <p class="price">Fiyat: 65 TL</p>
+  <a href="#" class="btn" onclick="openModal('7. Sınıf - Fen Bilimleri')">Satın Al</a>
+  <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📄 PDF İndir</a>
+</div>
+
+<div class="card">
+  <h3>Sosyal Bilgiler</h3>
+  <p class="price">Fiyat: 50 TL</p>
+  <a href="#" class="btn" onclick="openModal('7. Sınıf - Sosyal Bilgiler')">Satın Al</a>
+  <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📄 PDF İndir</a>
+</div>
+
+<!-- ================= 8. Sınıf ================= -->
+<h2>8. Sınıf Dersleri</h2>
+
+<div class="card">
+  <h3>Türkçe</h3>
+  <p class="price">Fiyat: 60 TL</p>
+  <a href="#" class="btn" onclick="openModal('8. Sınıf - Türkçe')">Satın Al</a>
+  <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📄 PDF İndir</a>
+</div>
+
+<div class="card">
+  <h3>Matematik</h3>
+  <p class="price">Fiyat: 70 TL</p>
+  <a href="#" class="btn" onclick="openModal('8. Sınıf - Matematik')">Satın Al</a>
+  <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📄 PDF İndir</a>
+</div>
+
+<div class="card">
+  <h3>Fen Bilimleri</h3>
+  <p class="price">Fiyat: 75 TL</p>
+  <a href="#" class="btn" onclick="openModal('8. Sınıf - Fen Bilimleri')">Satın Al</a>
+  <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📄 PDF İndir</a>
+</div>
+
+<div class="card">
+  <h3>T.C. İnkılap Tarihi ve Atatürkçülük</h3>
+  <p class="price">Fiyat: 55 TL</p>
+  <a href="#" class="btn" onclick="openModal('8. Sınıf - İnkılap Tarihi')">Satın Al</a>
+  <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📄 PDF İndir</a>
+</div><!-- ================= 9. SINIF ================= -->
+<div class="card">
+  <h3>Türk Dili ve Edebiyatı</h3>
+  <p class="price">Fiyat: 80 TL</p>
+  <a href="#" class="btn" onclick="openModal('9. Sınıf - Edebiyat')">Satın Al</a>
+  <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📄 PDF İndir</a>
+</div>
+
+<div class="card">
+  <h3>Matematik</h3>
+  <p class="price">Fiyat: 85 TL</p>
+  <a href="#" class="btn" onclick="openModal('9. Sınıf - Matematik')">Satın Al</a>
+  <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📄 PDF İndir</a>
+</div>
+
+<div class="card">
+  <h3>Fizik</h3>
+  <p class="price">Fiyat: 90 TL</p>
+  <a href="#" class="btn" onclick="openModal('9. Sınıf - Fizik')">Satın Al</a>
+  <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📄 PDF İndir</a>
+</div>
+
+<div class="card">
+  <h3>Kimya</h3>
+  <p class="price">Fiyat: 90 TL</p>
+  <a href="#" class="btn" onclick="openModal('9. Sınıf - Kimya')">Satın Al</a>
+  <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📄 PDF İndir</a>
+</div>
+
+<div class="card">
+  <h3>Biyoloji</h3>
+  <p class="price">Fiyat: 90 TL</p>
+  <a href="#" class="btn" onclick="openModal('9. Sınıf - Biyoloji')">Satın Al</a>
+  <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📄 PDF İndir</a>
+</div>
+
+<div class="card">
+  <h3>Tarih</h3>
+  <p class="price">Fiyat: 80 TL</p>
+  <a href="#" class="btn" onclick="openModal('9. Sınıf - Tarih')">Satın Al</a>
+  <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📄 PDF İndir</a>
+</div>
+
+<div class="card">
+  <h3>Coğrafya</h3>
+  <p class="price">Fiyat: 80 TL</p>
+  <a href="#" class="btn" onclick="openModal('9. Sınıf - Coğrafya')">Satın Al</a>
+  <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📄 PDF İndir</a>
+</div>
+
+<div class="card">
+  <h3>Felsefe</h3>
+  <p class="price">Fiyat: 75 TL</p>
+  <a href="#" class="btn" onclick="openModal('9. Sınıf - Felsefe')">Satın Al</a>
+  <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📄 PDF İndir</a>
+</div>
+
+<div class="card">
+  <h3>Din Kültürü ve Ahlak Bilgisi</h3>
+  <p class="price">Fiyat: 70 TL</p>
+  <a href="#" class="btn" onclick="openModal('9. Sınıf - Din Kültürü')">Satın Al</a>
+  <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📄 PDF İndir</a>
+</div>
+
+<div class="card">
+  <h3>İngilizce</h3>
+  <p class="price">Fiyat: 75 TL</p>
+  <a href="#" class="btn" onclick="openModal('9. Sınıf - İngilizce')">Satın Al</a>
+  <a href="https://drive.google.com/placeholder" class="btn" target="_blank">📄 PDF İndir</a>
+</div>
+<!-- ================= 9. SINIF SONU ================= -->
+
+<!-- ================= 10, 11, 12. sınıflar için aynı blokları kopyalayıp
+ders isimlerini ve fiyatları değiştirmen yeterli olacak. ================= -->
+
+
 </html>
